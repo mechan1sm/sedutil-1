@@ -42,6 +42,12 @@ uint8_t DtaDevLinuxDrive::prepareForS3Sleep(uint8_t lockingrange, const char *us
     {
         opal_ioctl_data.session.who = OPAL_ADMIN1;
     }
+    else if (!memcmp("Admin", userid, 5))
+
+    {
+        int n = atoi(&userid[5]);
+        opal_ioctl_data.session.who = OPAL_ADMIN1 + n - 1;
+    }
     else if (!memcmp("User", userid, 4))
     {
         int n = atoi(&userid[4]);
